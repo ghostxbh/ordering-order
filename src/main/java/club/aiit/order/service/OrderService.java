@@ -13,5 +13,5 @@ public interface OrderService {
      * @param orderDTO
      * @return
      */
-    OrderDTO reate(OrderDTO orderDTO);
+    OrderDTO create(OrderDTO orderDTO);
 }

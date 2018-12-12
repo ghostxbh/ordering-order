@@ -1,14 +1,15 @@
 package club.aiit.order.controller;
 
+import club.aiit.order.client.ProductClient;
+import club.aiit.order.dto.OrderDTO;
 import club.aiit.order.service.OrderService;
 import club.aiit.order.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,6 +23,8 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+//    @Autowired
+//    private ProductClient productClient;
     /**
      * 1、参数校验
      * 2、查询商品信息（调用商品服务）
@@ -30,7 +33,10 @@ public class OrderController {
      * 5、订单入库
      */
     @PostMapping("/create")
-    public ResultVo<Map<String,String>> create(){
-        return null;
+    public ResultVo<Map<String,String>> create(@RequestBody OrderDTO orderDTO){
+        Map<String,String> map = new HashMap<>();
+        OrderDTO orderDTO1 = orderService.create(orderDTO);
+        map.put("orderDTO",orderDTO1.toString());
+        return new ResultVo(1,"OK",map);
     }
 }
